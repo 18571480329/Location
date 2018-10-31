@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF2488c6</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF2488c6</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000</color>
+    <color name="blue">#29f</color>
+    <color name="blue_press">#48a</color>
+    <color name="gray">#eee</color>
+    <color name="gray_666_color">#666666</color>
+    <color name="fragment_background_color">#F2F2F2</color>
+    <color name="app_theme_color">#2488c6</color>
+    <color name="line_color">#CCCCCC</color>
+    <color name="loading">#FFF0F0F0</color>
+    <color name="transparent">#00000000</color>
+    <color name="reg_login_edit_bg">#40000000</color>
+    <color name="reg_login_icon_bg">#72000000</color>
+    <color name="btn_login_normal">#00A2FF</color>
+    <color name="btn_login_press">#0080CA</color>
+    <color name="default_text_color">#333333</color>
+    <color name="evaluate_select_color">#d4237a</color>
+    <color name="red">#EE0000</color>
+    <color name="comment_edit_bg">#E8E8E8</color>
+    <color name="comment_number_check_bg">#FF652F</color>
+    <color name="comment_number_uncheck_bg">#999999</color>
+    <color name="edit_text_color">#333333</color>
+</resources>
