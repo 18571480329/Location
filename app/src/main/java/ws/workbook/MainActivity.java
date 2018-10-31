@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity {
     MyFragment mMyFragment;
     CardFragment mCardFragment;
     LogFragment mLogFragment;
-    List<Fragment> mFragments;          //声明List集合用来存放Fragment
+    List<Fragment> mFragments;         //声明List集合用来存放Fragment
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
