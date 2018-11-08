@@ -1,4 +1,4 @@
-package ws.workbook.Fragment;
+package ws.workbook.ui.Fragment;
 
 import android.app.Activity;
 import android.os.Bundle;

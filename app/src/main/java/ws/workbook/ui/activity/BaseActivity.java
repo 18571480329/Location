@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 LingDaNet.Co.Ltd. All Rights Reserved.
  */
-package ws.workbook;
+package ws.workbook.ui.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jaeger.library.StatusBarUtil;
+
+import ws.workbook.R;
 
 /**
  * 描述：基础Activity，有头部的Activity都可以继承。头部分为左中右三部分，左和右均为图片，中间部分为文字描述。

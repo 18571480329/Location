@@ -1,4 +1,4 @@
-package ws.workbook.Fragment;
+package ws.workbook.ui.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;

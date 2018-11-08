@@ -1,21 +1,31 @@
-package ws.workbook;
+package ws.workbook.ui.activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ws.workbook.Fragment.CardFragment;
-import ws.workbook.Fragment.LogFragment;
-import ws.workbook.Fragment.MainFragment;
-import ws.workbook.Fragment.MyFragment;
+import ws.workbook.LocationApplication;
+import ws.workbook.R;
+import ws.workbook.service.LocationService;
+import ws.workbook.ui.Fragment.CardFragment;
+import ws.workbook.ui.Fragment.ShopFragment;
+import ws.workbook.ui.Fragment.MainFragment;
+import ws.workbook.ui.Fragment.MyFragment;
 
 public class MainActivity extends BaseActivity {
 
@@ -27,8 +37,10 @@ public class MainActivity extends BaseActivity {
     MainFragment mMainFragment;
     MyFragment mMyFragment;
     CardFragment mCardFragment;
-    LogFragment mLogFragment;
+    ShopFragment mLogFragment;
     List<Fragment> mFragments;         //声明List集合用来存放Fragment
+
+    private LocationService locationService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +49,14 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         initView();
         initData();
+        LocationPermission();
     }
 
     private void initView() {
         mMainNavigation
-                .addItem(new BottomNavigationItem(R.drawable.ic_main_work, "首页"))
+                .addItem(new BottomNavigationItem(R.drawable.home, "首页"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_main_card, "打卡"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_main_log, "日志"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_main_work, "商品"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_main_mine, "我的"))
                 .setMode(BottomNavigationBar.MODE_FIXED)
                 .setActiveColor(R.color.app_theme_color)
@@ -82,7 +95,7 @@ public class MainActivity extends BaseActivity {
         mMainFragment = new MainFragment();
         mMyFragment = new MyFragment();
         mCardFragment = new CardFragment();
-        mLogFragment = new LogFragment();
+        mLogFragment = new ShopFragment();
         //初始化List集合
         mFragments = new ArrayList<>();
         //将首页，打卡，日志，我的 加入到list集合
@@ -123,5 +136,70 @@ public class MainActivity extends BaseActivity {
         }
 
     }
+
+    private void LocationPermission() {
+        //如果没有ACCESS_COARSE_LOCATION权限，动态请求用户允许使用该权限
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+        } else {
+            requestLocation();
+        }
+    }
+
+    private void requestLocation() {
+        locationService = ((LocationApplication) getApplication()).locationService;
+        //获取locationService实例
+        locationService.registerListener(mListener);
+        locationService.setLocationOption(locationService.getDefaultLocationClientOption());
+        locationService.start();// 定位SDK
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {  //危险权限
+                    requestLocation();
+                } else {
+                    Toast.makeText(this, "没有授予定位权限！", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        // TODO Auto-generated method stub
+        locationService.unregisterListener(mListener); //注销掉监听
+        locationService.stop(); //停止定位服务
+        super.onStop();
+    }
+
+    /**
+     * 定位结果回调，重写onReceiveLocation方法
+     */
+    private BDAbstractLocationListener mListener = new BDAbstractLocationListener() {
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            StringBuffer sb = new StringBuffer(256);
+            sb.append("时间 : ");
+            sb.append(location.getTime());
+            sb.append("\n纬度 : ");
+            sb.append(location.getLatitude());
+            sb.append("\n经度 : ");
+            sb.append(location.getLongitude());
+            sb.append("\n地址信息 : ");
+            sb.append(location.getAddrStr());
+            sb.append("\n室内外判断结果: ");
+            sb.append(location.getUserIndoorState());
+            sb.append("\n方向");
+            sb.append(location.getDirection());
+            sb.append("\n周围建筑: ");
+            sb.append(location.getLocationDescribe());
+//            mLoginResetpswTv.setText(sb.toString());
+        }
+    };
+
 
 }

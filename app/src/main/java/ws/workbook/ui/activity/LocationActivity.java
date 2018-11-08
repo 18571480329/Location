@@ -1,4 +1,4 @@
-package ws.workbook;
+package ws.workbook.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -29,15 +29,17 @@ import com.baidu.location.BDLocation;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ws.workbook.LocationApplication;
+import ws.workbook.R;
 import ws.workbook.service.LocationService;
 
 /**
  * 作者： 王爽
  * 日期： 2018/10/9
- * 描述：登录页面
+ * 描述：页面
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnFocusChangeListener, TextWatcher,
+public class LocationActivity extends AppCompatActivity implements View.OnFocusChangeListener, TextWatcher,
         CompoundButton.OnCheckedChangeListener {
 
     @BindView(R.id.username_iv)
@@ -140,7 +142,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
                 mUsernameEt.setText("");
                 break;
             case R.id.login_btn:
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(LocationActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
                 break;
