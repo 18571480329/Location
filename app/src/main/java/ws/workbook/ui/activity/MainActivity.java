@@ -23,9 +23,10 @@ import ws.workbook.LocationApplication;
 import ws.workbook.R;
 import ws.workbook.service.LocationService;
 import ws.workbook.ui.Fragment.CardFragment;
-import ws.workbook.ui.Fragment.ShopFragment;
 import ws.workbook.ui.Fragment.MainFragment;
 import ws.workbook.ui.Fragment.MyFragment;
+import ws.workbook.ui.Fragment.ShopFragment;
+import ws.workbook.ui.Fragment.ShopFragment2;
 
 public class MainActivity extends BaseActivity {
 
@@ -37,7 +38,8 @@ public class MainActivity extends BaseActivity {
     MainFragment mMainFragment;
     MyFragment mMyFragment;
     CardFragment mCardFragment;
-    ShopFragment mLogFragment;
+    ShopFragment mShopFragment;
+    ShopFragment2 mShopFragment2;
     List<Fragment> mFragments;         //声明List集合用来存放Fragment
 
     private LocationService locationService;
@@ -57,6 +59,7 @@ public class MainActivity extends BaseActivity {
                 .addItem(new BottomNavigationItem(R.drawable.home, "首页"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_main_card, "打卡"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_main_work, "商品"))
+                .addItem(new BottomNavigationItem(R.drawable.shop, "商品"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_main_mine, "我的"))
                 .setMode(BottomNavigationBar.MODE_FIXED)
                 .setActiveColor(R.color.app_theme_color)
@@ -78,6 +81,9 @@ public class MainActivity extends BaseActivity {
                     case 3:
                         switchFragment(3);
                         break;
+                    case 4:
+                        switchFragment(4);
+                        break;
                 }
             }
 
@@ -95,13 +101,15 @@ public class MainActivity extends BaseActivity {
         mMainFragment = new MainFragment();
         mMyFragment = new MyFragment();
         mCardFragment = new CardFragment();
-        mLogFragment = new ShopFragment();
+        mShopFragment = new ShopFragment();
+        mShopFragment2 = new ShopFragment2();
         //初始化List集合
         mFragments = new ArrayList<>();
         //将首页，打卡，日志，我的 加入到list集合
         mFragments.add(mMainFragment);
         mFragments.add(mCardFragment);
-        mFragments.add(mLogFragment);
+        mFragments.add(mShopFragment);
+        mFragments.add(mShopFragment2);
         mFragments.add(mMyFragment);
         addFragment(mMainFragment);
         mCurrentFragment = mMainFragment;

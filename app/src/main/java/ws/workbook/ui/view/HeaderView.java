@@ -28,21 +28,23 @@ import ws.workbook.adapter.MenuAdapter;
 
 public class HeaderView extends LinearLayout {
     private Context mContext;
-    private Banner mBanner;
+    public static Banner mBanner;
     private RecyclerView mMenuRv;
     private List<String> imageUrl;
     private List<String> titleUrl;
+    public static StickyScrollView stickyScrollView;
+    public static int height;
 
     public HeaderView(Context context) {
         super(context);
         View view = LayoutInflater.from(context).inflate(R.layout.header_layout, this, true);
         mBanner = view.findViewById(R.id.banner);
         mMenuRv = view.findViewById(R.id.menu_rv);
+        stickyScrollView = view.findViewById(R.id.stickyScrollView);
         this.mContext = context;
         initView();
         initData();
     }
-
 
 
     private void initView() {
@@ -54,7 +56,9 @@ public class HeaderView extends LinearLayout {
             imageUrl.add("http://www.tanfangwang.com/uploads/20180803/b6ee2109c08b2993fdf14ea7ce0008dc.png");
         }
 
+
     }
+
 
     private void initData() {
         //设置轮播图
@@ -66,8 +70,9 @@ public class HeaderView extends LinearLayout {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mMenuRv.setLayoutManager(linearLayoutManager);
         mMenuRv.setAdapter(adapter);
-
     }
+
+
 
     private void setBanner() {
         //设置banner样式
@@ -96,7 +101,7 @@ public class HeaderView extends LinearLayout {
             //Glide 加载图片简单用法
             Glide.with(context).load(path).into(imageView);
         }
-
     }
+
 
 }

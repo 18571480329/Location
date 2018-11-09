@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <ws.workbook.ui.view.StickyScrollView
+            android:id="@+id/stickyScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:tag="sticky">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/menu_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/shop_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+        </ws.workbook.ui.view.StickyScrollView>
+
+        <RelativeLayout
+            android:id="@+id/ll_good_detail"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="#00000000"
+            android:paddingTop="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#00000000"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dip"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/back"
+                android:text="返回"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#00000000"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dip"
+                android:id="@+id/peri"
+                android:text="商品"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#00000000"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dip"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/share"
+                android:text="分享"/>
+
+
+        </RelativeLayout>
+
+    </FrameLayout>
